@@ -1,4 +1,6 @@
 class List
+  @@all_list = []
+
   def initialize(location)
     @location = location
     @tasks = []
@@ -6,7 +8,6 @@ class List
 
   def location
     @location
-
   end
 
   def tasks
@@ -16,4 +17,17 @@ class List
   def add_task(task)
     @tasks << task
   end
+
+  def List.all
+    @@all_list
+  end
+
+  def save
+    @@all_list << self
+  end
+
+  def List.clear
+    @@all_list = []
+  end
+
 end

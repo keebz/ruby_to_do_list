@@ -1,7 +1,6 @@
 require './lib/task'
 require './lib/list'
 
-@place_list = []
 
 @current_list = nil
 def main_menu
@@ -25,7 +24,7 @@ def main_menu
 
         else
         selected_place = option.to_i
-        @current_list = @place_list[selected_place-1]
+        @current_list = List.all[selected_place-1]
 
         puts "Press 'a' to add a task or 'l' to list all of your tasks"
         puts "Press 'd' to DELETE a task"
@@ -55,15 +54,17 @@ end
 def add_place
   puts "Enter a place/location"
   user_place = gets.chomp
-  @place_list << List.new(user_place)
+  new_list = List.new(user_place)
+  new_list.save
+  # @place_list << List.new(user_place)
   puts "Place added. \n\n"
 end
 
 def list_places
   puts "Here are all of your places:"
 
-  @place_list.each do |place|
-    location = @place_list.index(place)
+  List.all.each do |place|
+    location = List.all.index(place)
     puts (location + 1).to_s + ": " + place.location
   end
   puts "\n"
